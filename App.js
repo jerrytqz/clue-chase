@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import PlayScreen from './pages/PlayScreen';
+import CreateScreen from './pages/CreateScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,26 +15,22 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Welcome'}}
+          options={{ title: 'Home' }}
         />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Play" component={PlayScreen} />
+        <Stack.Screen name="Create" component={CreateScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   return (
-    <Button
-      title="Go to Jane's profile"
-      onPress={() =>
-        navigation.navigate('Profile', {name: 'Jane'})
-      }
-    />
+    <>
+      <Button title="Play" onPress={() => navigation.navigate('Play')} />
+      <Button title="Create" onPress={() => navigation.navigate('Create')} />
+    </>
   );
-};
-const ProfileScreen = ({navigation, route}) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
 };
 
 const styles = StyleSheet.create({
